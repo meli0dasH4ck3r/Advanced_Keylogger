@@ -28,3 +28,18 @@ def check_telegram(last_update_id):
     except requests.exceptions.RequestException as e:
         print(f"Error connecting to Telegram API: {str(e)}")
     return None, None, last_update_id
+
+# Send a message to Telegram
+def send_telegram(message):
+    payload = {
+        'chat_id': CHAT_ID,
+        'text': message
+    }
+    try:
+        response = requests.post(TELEGRAM_URL, data=payload)
+        print(response.json())
+        response.raise_for_status()  # Raise an error for bad responses
+        return response.status_code
+    except requests.exceptions.RequestException as e:
+        print(f"Error sending message to Telegram: {str(e)}")
+        return None
