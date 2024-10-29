@@ -1,6 +1,6 @@
 import pytest
 import re
-from keylogger import get_mac, SystemInfo, IPAddress
+from get_info import get_mac, SystemInfo, IPAddress
 
 # Test case for get_mac function
 def test_get_mac():

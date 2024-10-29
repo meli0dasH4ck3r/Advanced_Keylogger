@@ -74,11 +74,10 @@ class SystemInfo:
             f"CPU: {self.cpu_info}\n"
             f"RAM: {self.ram_info}\n"
             "Disks:\n" + "\n".join(self.disk_info) + "\n" +
-            "GPU(s):\n" + "\n".join(self.gpu_info) + "\n" +
-            f"Operating System: {self.os_info}"
+            "GPU(s):\n" + "\n".join(self.gpu_info) + "\n"
         )
         return system_info
-    
+        
 class IPAddress:
     @staticmethod
     def get_local_ip() -> str:

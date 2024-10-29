@@ -23,4 +23,3 @@ def send_screenshot():
     except Exception as e:
         print(f"Error taking or sending screenshot: {str(e)}")
 
-send_screenshot()
