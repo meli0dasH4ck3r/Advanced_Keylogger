@@ -132,7 +132,7 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 - **Pynput**: For keylogging functionality.
 - **Pillow**: For screenshot functionality.
 
-## Author:![meli0das](https://www.facebook.com/callmemeli0das/)
+## Author: meli0das
 
 ## Contact: nguyenvietkhoi.work@gmail.com
 
