@@ -37,6 +37,12 @@ Install all the necessary libraries for this project:
 pip3 install -r requirements.txt
 ```
 
+Use command below to execute the program: 
+
+```python 
+python main.py
+```
+
 ### Configuration
 
 1. **API Token**:
