@@ -14,6 +14,7 @@ This Python-based project is a keylogger combined with a Telegram bot that allow
    - `/location`: Fetch the device's current location based on its public IP.
    - `/os`: Gather and send the system's OS information.
    - `/configuration`: Gather and send the system's detailed configuration (CPU, RAM, GPU, Disk)
+   - `/dump_password`: Extract Chrome's password 
    - `/screenshot`: Capture a screenshot and send it to the Telegram chat.
    - `/shutdown`: Shutdown victim's PC
 3. **Remote Control**: Users can send commands to the bot via Telegram and receive real-time responses from the bot.
@@ -34,6 +35,12 @@ Install all the necessary libraries for this project:
 
 ```bash
 pip3 install -r requirements.txt
+```
+
+Use command below to execute the program: 
+
+```python 
+python main.py
 ```
 
 ### Configuration
@@ -75,6 +82,7 @@ Once the script is running, you can control it via Telegram by sending the follo
 - `/location`: Fetch the device's current location based on its public IP address.
 - `/os`: Get detailed system's OS information.
 - `/os`: Get detailed system information such as CPU, RAM, disks, and GPUs.
+- `/dump_password`: Extract Chrome's password
 - `/screenshot`: Take a screenshot of the current screen and send it to the Telegram chat.
 - `/shutdown`: Shutdown victim's PC
 
