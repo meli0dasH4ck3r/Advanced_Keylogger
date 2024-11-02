@@ -42,4 +42,4 @@ last_update_id = 0
 text, message_id, last_update_id = check_telegram(last_update_id)
 
 check_telegram(last_update_id) 
-send_telegram('Hello! My name is mini_meli0das, a mini version of meli0dasH4ck3r. My function is to control the Advanced Keylogger of meli0dasH4ck3r. How can I help you?')
+send_telegram('Hello! My name is mini_meli0das, a mini version of meli0dasH4ck3r. How can I help you?')
